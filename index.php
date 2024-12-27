@@ -4,7 +4,7 @@ include "config.php";
 include "functions.php";
 
 $data = file_get_contents("data.txt");
-$data1 = file_get_contents("https://github.com/Surfboardv2ray/Proxy-sorter/raw/refs/heads/main/custom/mahsa.txt");
+$data1 = file_get_contents("https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mci/sub_1.txt");
 
 
 
@@ -47,5 +47,5 @@ file_put_contents("Split/Normal/trojan", $merged_trojan);
 file_put_contents("Split/Base64/trojan", base64_encode($merged_trojan));
 file_put_contents("Split/Normal/shadowsocks", $merged_shadowsocks);
 file_put_contents("Split/Base64/shadowsocks", base64_encode($merged_shadowsocks));
-file_put_contents("data.txt", file_get_contents("https://github.com/Surfboardv2ray/Proxy-sorter/raw/refs/heads/main/custom/mahsa.txt"));
+file_put_contents("data.txt", file_get_contents("https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mci/sub_1.txt"));
 }
