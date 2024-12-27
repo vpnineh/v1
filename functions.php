@@ -465,12 +465,8 @@ function process_config($config)
     $ip = get_ip($parsed_config, $type, $is_reality);
     $port = get_port($parsed_config, $type);
     $ping_data = ping($ip, $port);
-    $flag = get_flag($ip);
-    echo $flag;
-    if ($flag === "🇺🇸US")
-        {return false;}
     if ($ping_data !== "unavailable") {
-        
+        $flag = get_flag($ip);
         $name_key = $name_array[$type];
         $parsed_config[$name_key] = generate_name(
             $flag,
