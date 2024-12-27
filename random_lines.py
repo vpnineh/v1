@@ -1,4 +1,4 @@
-import lite
+import random
 
 # File names
 input_file = 'merged'
