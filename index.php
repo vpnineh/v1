@@ -26,7 +26,7 @@ file_put_contents("merged_base64", base64_encode($merged_mix));
 # Random Lines
   $lines = file('merged');
   shuffle($lines);
-  $random_lines = array_slice($lines, 0, 50);
+  $random_lines = array_slice($lines, 0, 25);
   file_put_contents("lite", $random_lines);
   file_put_contents("lite64", base64_encode(file_get_contents("lite")));
 
