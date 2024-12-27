@@ -9,7 +9,7 @@ on:
 
   workflow_dispatch:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 */4 * * *"
 
 jobs:
   build:
@@ -24,10 +24,16 @@ jobs:
           php-version: '7.4'
           
       - name: Execute PHP script
+        run: php index.php
+
+      - name: Commit and Push changes
         run: |
-          php index.php
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          git commit -m "🚀 Done! - $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M:%S')"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add -A
+            git commit -m "🚀 Successfully - $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "No changes to commit."
+          fi
