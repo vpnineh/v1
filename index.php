@@ -23,6 +23,13 @@ if($data != $data1)
 file_put_contents("merged", $merged_mix);
 file_put_contents("merged_base64", base64_encode($merged_mix));
 
+# Random Lines
+  $lines = file('merged');
+  shuffle($lines);
+  $random_lines = array_slice($lines, 0, 20);
+  file_put_contents("lite", $random_lines);
+  file_put_contents("lite64", base64_encode($random_lines));
+
   //Archive - start
 
     date_default_timezone_set('Iran');
