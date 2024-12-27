@@ -28,7 +28,7 @@ file_put_contents("merged_base64", base64_encode($merged_mix));
   shuffle($lines);
   $random_lines = array_slice($lines, 0, 20);
   file_put_contents("lite", $random_lines);
-  file_put_contents("lite64", base64_encode($random_lines));
+  file_put_contents("lite64", base64_encode(file_get_contents("lite")));
 
   //Archive - start
 
