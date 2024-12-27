@@ -1,11 +1,11 @@
-import random
+import lite
 
 # File names
-input_file = 'output/converted.txt'
-output_file = 'selector/random'
+input_file = 'merged'
+output_file = 'lite'
 
 # Number of lines to select
-num_lines_to_select = 100
+num_lines_to_select = 50
 
 def select_random_lines(input_file, output_file, num_lines):
     with open(input_file, 'r') as f:
