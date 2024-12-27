@@ -467,7 +467,7 @@ function process_config($config)
     $ping_data = ping($ip, $port);
     $flag = get_flag($ip);
     echo $flag;
-    if ($flag === "US")
+    if ($flag === "🇺🇸US")
         {return false;}
     if ($ping_data !== "unavailable") {
         
