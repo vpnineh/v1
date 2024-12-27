@@ -27,10 +27,11 @@ file_put_contents("merged_base64", base64_encode($merged_mix));
 
     date_default_timezone_set('Iran');
     $date  = date('Y-m-d H:i:s');
+    $date2 = date('Y-m-d');
     $fileName = 'Archive';
     $fileName = $fileName.'_'.$date;
-    $path = 'update/'.$fileName.'.txt';
-    $path2 = 'update/ss/'.$fileName.'.txt';
+    $path = 'update/'.$date2.'/'.$fileName.'.txt';
+    $path2 = 'update/'.$date2.'/ss/'.$fileName.'.txt';
 
 file_put_contents($path, $merged_mix);
 file_put_contents($path2, $merged_shadowsocks);
