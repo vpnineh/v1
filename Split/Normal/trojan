@@ -1,9 +1,6 @@
-trojan://4dcbec80-c42b-11ef-ab4b-1239d0255272@fr1.test3.net:443?security=tls&headerType=none&type=tcp&sni=telewebion.com#IR🇮🇷 | @VPNineh | 256
-trojan://acce0250-c42b-11ef-98dd-1239d0255272@uk1.test3.net:443?security=tls&headerType=none&type=tcp&sni=telewebion.com#IR🇮🇷 | @VPNineh | 194.19
-trojan://97bc3270-c42b-11ef-a244-1239d0255272@fr1.test3.net:443?security=tls&headerType=none&type=tcp&sni=telewebion.com#IR🇮🇷 | @VPNineh | 192.09
-trojan://76c8e7d0-c42b-11ef-a4b9-1239d0255272@uk1.test3.net:443?security=tls&headerType=none&type=tcp&sni=telewebion.com#IR🇮🇷 | @VPNineh | 271.32
-trojan://e8105dfd24414268b6c7652c63731097@108.61.177.251:443?allowInsecure=1&sni=yournextcareerstep.online#FR🇫🇷 | @VPNineh | 95.09
-trojan://984e400bf5d541b7b0815913fe0c432a@yournextcareerstep.online:443?security=tls&headerType=none&type=tcp#FR🇫🇷 | @VPNineh | 95.2
-trojan://FuUaWS3YWG@38.175.201.156:2053?mode=gun&security=tls&alpn=h2&fp=chrome&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 156.12
-trojan://FuUaWS3YWG@38.175.201.156:2053?security=tls&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 173.29
-trojan://FuUaWS3YWG@Crunch.floorshoping22.com:2053?mode=multi&security=tls&alpn=h2&fp=chrome&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 106.71
+trojan://e8105dfd24414268b6c7652c63731097@108.61.177.251:443?allowInsecure=1&sni=yournextcareerstep.online#FR🇫🇷 | @VPNineh | 184
+trojan://984e400bf5d541b7b0815913fe0c432a@yournextcareerstep.online:443?security=tls&headerType=none&type=tcp#FR🇫🇷 | @VPNineh | 152.34
+trojan://FuUaWS3YWG@38.175.201.156:2053?mode=gun&security=tls&alpn=h2&fp=chrome&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 137.81
+trojan://FuUaWS3YWG@38.175.201.156:2053?security=tls&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 73.48
+trojan://FuUaWS3YWG@Crunch.floorshoping22.com:2053?mode=multi&security=tls&alpn=h2&fp=chrome&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 124.87
+trojan://FuUaWS3YWG@Crunch.floorshoping22.com:2053?mode=multi&security=tls&alpn=h2&fp=chrome&type=grpc&sni=Crunch.floorshoping22.com#US🇺🇸 | @VPNineh | 49
