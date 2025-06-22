@@ -4,7 +4,7 @@ include "config.php";
 include "functions.php";
 
 $data = file_get_contents("data.txt");
-$data1 = file_get_contents("https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mci/sub_1.txt");
+$data1 = file_get_contents("https://raw.githubusercontent.com/vpnineh/TGC/refs/heads/main/sub");
 
 
 
