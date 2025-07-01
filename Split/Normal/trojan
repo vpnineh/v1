@@ -1,14 +1,13 @@
-trojan://3bcd9e33-8377-4b32-af33-217158577ff3@143.110.246.228:443?security=tls&type=tcp&sni=kdlsupport.zendesk.com#US🇺🇸 | @VPNineh | 9.84
-trojan://6gZh2JbfhQ@104.248.18.1:1935?security=tls&headerType=none&type=tcp&sni=x1-germany-digitalocean-v2.devefun.org#DE🇩🇪 | @VPNineh | 413.42
-trojan://71409d3e488548e8bb076d229778f008@38.99.82.225:443?encryption=none&security=none&type=raw&headertype=none#US🇺🇸 | @VPNineh | 23.63
-trojan://8aab51da-6b67-4bd2-b6e6-5ab3008cf53e@13.76.251.170:443?security=tls&headerType=none&type=tcp&sni=jp.iamnotagoodman.com#HK🇭🇰 | @VPNineh | 432.65
-trojan://Bw5Mz7QkVp@45.32.137.6:443?security=tls&type=tcp&sni=z-v2-082509.kailib.com#US🇺🇸 | @VPNineh | 117.23
-trojan://Bw5Mz7QkVp@45.76.80.201:443?security=tls&sni=z-v2-082554.kailib.com&type=tcp&allowInsecure=1#US🇺🇸 | @VPNineh | 79.36
-trojan://TurbooServer@67.207.79.28:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 181.75
-trojan://TurbooServer@67.207.79.28:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 4.59
-trojan://TurbooServer@turbooserver.aftabz.com:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 4.29
-trojan://TurbooServer@turbooserver.aftabz.com:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 4.37
-trojan://TurbooServer@turbooserver.aftabz.com:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 3.43
-trojan://b43d4e0f-4bd6-4cd7-bf21-31cb9560deb5@de.mjt001.com:443?encryption=none&security=tls&sni=de.mjt001.com&type=raw&headertype=none#HK🇭🇰 | @VPNineh | 366.63
-trojan://vip@104.26.4.57:443?security=tls&headerType=none&type=tcp&sni=heihu880.pages.dev#R 🚩 | @VPNineh | 119.51
-trojan://wPslQ6KBJN@wivip.dtsazino.com:443?security=tls&headerType=none&type=tcp&sni=wivip.dtsazino.com#IR🇮🇷 | @VPNineh | 412.99
+trojan://3bcd9e33-8377-4b32-af33-217158577ff3@160.16.135.40:443?security=tls&sni=kdlsupport.zendesk.com&type=tcp#US🇺🇸 | @VPNineh | 49.74
+trojan://3bcd9e33-8377-4b32-af33-217158577ff3@160.16.138.58:443?security=tls&sni=kdlsupport.zendesk.com&type=tcp#US🇺🇸 | @VPNineh | 27.85
+trojan://3bcd9e33-8377-4b32-af33-217158577ff3@160.16.150.202:443?security=tls&sni=kdlsupport.zendesk.com&type=tcp#US🇺🇸 | @VPNineh | 49.26
+trojan://6gZh2JbfhQ@104.248.18.1:1935?security=tls&headerType=none&type=tcp&sni=x1-germany-digitalocean-v2.devefun.org#DE🇩🇪 | @VPNineh | 411.36
+trojan://71409d3e488548e8bb076d229778f008@38.99.82.225:443?encryption=none&security=none&type=raw&headertype=none#US🇺🇸 | @VPNineh | 44.4
+trojan://8aab51da-6b67-4bd2-b6e6-5ab3008cf53e@13.76.251.170:443?security=tls&headerType=none&type=tcp&sni=jp.iamnotagoodman.com#HK🇭🇰 | @VPNineh | 351.38
+trojan://Bw5Mz7QkVp@45.32.137.6:443?security=tls&type=tcp&sni=z-v2-082509.kailib.com#US🇺🇸 | @VPNineh | 112.71
+trojan://TurbooServer@67.207.79.28:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 176.06
+trojan://TurbooServer@67.207.79.28:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 3.81
+trojan://TurbooServer@turbooserver.aftabz.com:8080?security=reality&pbk=MlCxfES5k6SVZz4qfrnfF516r60hVZ7izp5MvPbfYk4&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=tgju.org&sid=d5e7#R | R 🚩 |  @VPNineh | 4.03
+trojan://b43d4e0f-4bd6-4cd7-bf21-31cb9560deb5@de.mjt001.com:443?encryption=none&security=tls&sni=de.mjt001.com&type=raw&headertype=none#HK🇭🇰 | @VPNineh | 518.33
+trojan://vip@104.26.4.57:443?security=tls&headerType=none&type=tcp&sni=heihu880.pages.dev#R 🚩 | @VPNineh | 19.69
+trojan://wPslQ6KBJN@wivip.dtsazino.com:443?security=tls&headerType=none&type=tcp&sni=wivip.dtsazino.com#IR🇮🇷 | @VPNineh | 362.84
