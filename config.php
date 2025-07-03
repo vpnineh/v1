@@ -1,6 +1,6 @@
 <?php
 
 $subscription_urls = [
-  "https://raw.githubusercontent.com/vpnineh/TGC/refs/heads/main/sub",
-  "https://github.com/vpnineh/VTGC/raw/refs/heads/main/mixed_iran.txt"
+  "https://raw.githubusercontent.com/Surfboardv2ray/Proxy-sorter/refs/heads/main/custom/mahsa.txt",
+  "https://github.com/Surfboardv2ray/Proxy-sorter/blob/main/custom/udp.txt"
 ];
