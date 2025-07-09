@@ -181,7 +181,7 @@ function addHash($obj)
 function remove_duplicate_xray($input, $type)
 {
     $array = explode("\n", $input);
-    $result = [];
+
     foreach ($array as $item) {
         $parts = parseProxyUrl($item, $type);
         $part_hash = $parts["hash"];
@@ -262,7 +262,7 @@ function BuildShadowsocks($server)
 function remove_duplicate_ss($input)
 {
     $array = explode("\n", $input);
-    $result = [];
+
     foreach ($array as $item) {
         $parts = ParseShadowsocks($item);
         $part_hash = $parts["name"];
@@ -287,79 +287,292 @@ function remove_duplicate_ss($input)
     return $output;
 }
 
-/** Ping function optimized */
-function ping($host, $timeout = 1)
+function is_ip($string)
 {
-    // Try to ping 1 time with timeout in seconds
-    $cmd = "";
+    $ipv4_pattern = '/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/';
+    $ipv6_pattern = '/^[0-9a-fA-F:]+$/'; // matches any valid IPv6 address
 
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-        // Windows
-        $cmd = sprintf('ping -n 1 -w %d %s', $timeout * 1000, escapeshellarg($host));
+    if (preg_match($ipv4_pattern, $string) || preg_match($ipv6_pattern, $string)) {
+        return true;
     } else {
-        // Linux/macOS
-        $cmd = sprintf('ping -c 1 -W %d %s', $timeout, escapeshellarg($host));
+        return false;
     }
+}
 
-    exec($cmd, $output, $status);
-
-    if ($status === 0) {
-        // Check if output contains "time=" or "time<"
-        foreach ($output as $line) {
-            if (preg_match('/time[=<]\d+(\.\d+)?/', $line)) {
-                return true;
-            }
+function ip_info($ip)
+{
+    if (is_ip($ip) === false) {
+        $ip_address_array = dns_get_record($ip, DNS_A);
+        if (is_array($ip_address_array)) {
+            $randomKey = array_rand($ip_address_array);
+            $ip = $ip_address_array[$randomKey]["ip"];
         }
     }
+    $ipinfo = json_decode(
+        file_get_contents("https://api.country.is/" . $ip),
+        true
+    );
+    return $ipinfo;
+}
 
+function get_flag($ip)
+{
+    $flag = "";
+    $ip_info = ip_info($ip);
+    if (isset($ip_info["country"])) {
+        $location = $ip_info["country"];
+        $flag = $location . getFlags($location);
+    } else {
+        $flag = "R 🚩";
+    }
+    return $flag;
+}
+
+function getFlags($country_code)
+{
+    $flag = mb_convert_encoding(
+        "&#" . (127397 + ord($country_code[0])) . ";",
+        "UTF-8",
+        "HTML-ENTITIES"
+    );
+    $flag .= mb_convert_encoding(
+        "&#" . (127397 + ord($country_code[1])) . ";",
+        "UTF-8",
+        "HTML-ENTITIES"
+    );
+    return $flag;
+}
+
+
+function get_ip($config, $type, $is_reality)
+{
+    switch ($type) {
+        case "vmess":
+            return get_vmess_ip($config);
+        case "vless":
+            return get_vless_ip($config, $is_reality);
+        case "trojan":
+            return get_trojan_ip($config);
+        case "ss":
+            return get_ss_ip($config);
+    }
+}
+
+function get_vmess_ip($input)
+{
+    return !empty($input["sni"])
+        ? $input["sni"]
+        : (!empty($input["host"])
+            ? $input["host"]
+            : $input["add"]);
+}
+
+function get_vless_ip($input, $is_reality)
+{
+    return $is_reality
+        ? $input["hostname"]
+        : (!empty($input["params"]["sni"])
+            ? $input["params"]["sni"]
+            : (!empty($input["params"]["host"])
+                ? $input["params"]["host"]
+                : $input["hostname"]));
+}
+
+function get_trojan_ip($input)
+{
+    return !empty($input["params"]["sni"])
+        ? $input["params"]["sni"]
+        : (!empty($input["params"]["host"])
+            ? $input["params"]["host"]
+            : $input["hostname"]);
+}
+
+function get_ss_ip($input)
+{
+    return $input["server_address"];
+}
+
+function get_port($input, $type)
+{
+    $port = "";
+    switch ($type) {
+        case "vmess":
+            $port = $input["port"];
+            break;
+        case "vless":
+            $port = $input["port"];
+            break;
+        case "trojan":
+            $port = $input["port"];
+            break;
+        case "ss":
+            $port = $input["server_port"];
+            break;
+    }
+    return $port;
+}
+
+function ping($ip, $port)
+{
+    $it = microtime(true);
+    $check = @fsockopen($ip, $port, $errno, $errstr, 0.5);
+    $ft = microtime(true);
+    $militime = round(($ft - $it) * 1e3, 2);
+    if ($check) {
+        fclose($check);
+        return $militime;
+    } else {
+        return "unavailable";
+    }
+}
+
+function generate_name($flag, $ip, $port, $ping, $is_reality)
+{
+    $name = "";
+    switch ($is_reality) {
+        case true:
+            $name =
+                "R | " .
+                $flag .
+                " | " .
+                " @VPNineh" .
+                " | " .
+                $ping;
+            break;
+        case false:
+            $name =
+                $flag .
+                " | " .
+                "@VPNineh" .
+                " | " .
+                $ping;
+            break;
+    }
+    return $name;
+}
+
+function process_config($config)
+{
+    $name_array = [
+        "vmess" => "ps",
+        "vless" => "hash",
+        "trojan" => "hash",
+        "ss" => "name",
+    ];
+    $type = detect_type($config);
+    $is_reality = stripos($config, "reality") !== false ? true : false;
+    $parsed_config = parse_config($config);
+    $ip = get_ip($parsed_config, $type, $is_reality);
+    $port = get_port($parsed_config, $type);
+    $ping_data = ping($ip, $port);
+    if ($ping_data !== "unavailable") {
+        $flag = get_flag($ip);
+        $name_key = $name_array[$type];
+        $parsed_config[$name_key] = generate_name(
+            $flag,
+            $ip,
+            $port,
+            $ping_data,
+            $is_reality
+        );
+        $final_config = build_config($parsed_config, $type);
+        return $final_config;
+    }
     return false;
 }
 
-/** Remove unavailable configs by ping test */
-function remove_unavailable_configs($configs)
+/** Extract reality configs */
+function get_reality($input)
 {
-    $filtered = [];
-    foreach ($configs as $config) {
-        $type = detect_type($config);
-        $parsed = parse_config($config);
-        $host = "";
-
-        switch ($type) {
-            case "vmess":
-                $host = $parsed["add"] ?? $parsed["hostname"] ?? "";
-                break;
-            case "vless":
-            case "trojan":
-                $host = $parsed["hostname"] ?? "";
-                break;
-            case "ss":
-                $host = $parsed["server_address"] ?? "";
-                break;
-            default:
-                $host = "";
+    $array = explode("\n", $input);
+    $output = "";
+    foreach ($array as $item) {
+        if (stripos($item, "reality")) {
+            $output .= $output === "" ? $item : "\n$item";
         }
-
-        if ($host !== "" && ping($host)) {
-            $filtered[] = $config;
-        }
-        // else: حذف کانفیگ‌هایی که پینگ آنها ناموفق بوده
     }
-    return $filtered;
+    return $output;
 }
 
-// --------- نمونه استفاده ---------
+/** Check if subscription is base64 encoded or not */
+function is_base64_encoded($string)
+{
+    if (base64_encode(base64_decode($string, true)) === $string) {
+        return "true";
+    } else {
+        return "false";
+    }
+}
 
-$input = "vmess://...";  // رشته کانفیگ‌ها با جداکننده \n
-$configs = explode("\n", trim($input));
+function process_subscriptions($input)
+{
+    $output = [];
+    if (is_base64_encoded($input) === "true") {
+        $data = base64_decode($input);
+        $output = process_subscriptions_helper($data);
+    } else {
+        $output = process_subscriptions_helper($input);
+    }
+    return $output;
+}
 
-// حذف کانفیگ‌های تکراری (مثال برای vmess)
-$configs = array_unique($configs); // یا از توابع remove_duplicate_xray و ... استفاده کن
+function process_subscriptions_helper($input)
+{
+    $output = [];
+    $data_array = explode("\n", $input);
+    foreach ($data_array as $config) {
+        $processed_config = process_config($config);
+        if ($processed_config !== false) {
+            $type = detect_type($processed_config);
+            switch ($type) {
+                case "vmess":
+                    $output["vmess"][] = $processed_config;
+                    break;
+                case "vless":
+                    $output["vless"][] = $processed_config;
+                    break;
+                case "trojan":
+                    $output["trojan"][] = $processed_config;
+                    break;
+                case "ss":
+                    $output["ss"][] = $processed_config;
+                    break;
+            }
+        }
+    }
+    return $output;
+}
 
-// حذف کانفیگ‌های unavailable
-$configs = remove_unavailable_configs($configs);
+function merge_subscription($input)
+{
+    $output = [];
+    $vmess = "";
+    $vless = "";
+    $trojan = "";
+    $shadowsocks = "";
+    foreach ($input as $subscription_url) {
+        $subscription_data = file_get_contents($subscription_url);
+        $processed_array = process_subscriptions($subscription_data);
+        $vmess .= isset($processed_array["vmess"])
+            ? implode("\n", $processed_array["vmess"]) . "\n"
+            : null;
+        $vless .= isset($processed_array["vless"])
+            ? implode("\n", $processed_array["vless"]) . "\n"
+            : null;
+        $trojan .= isset($processed_array["trojan"])
+            ? implode("\n", $processed_array["trojan"]) . "\n"
+            : null;
+        $shadowsocks .= isset($processed_array["ss"])
+            ? implode("\n", $processed_array["ss"]) . "\n"
+            : null;
+    }
+    $output['vmess'] = explode("\n", $vmess);
+    $output['vless'] = explode("\n", $vless);
+    $output['trojan'] = explode("\n", $trojan);
+    $output['ss'] = explode("\n", $shadowsocks);
+    return $output;
+}
 
-// خروجی نهایی
-$output = implode("\n", $configs);
-echo $output;
-
-?>
+function array_to_subscription($input) {
+    return implode("\n", $input);
+}
