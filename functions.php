@@ -422,16 +422,24 @@ function get_port($input, $type)
 function ping($ip, $port)
 {
     $it = microtime(true);
-    $check = @fsockopen($ip, $port, $errno, $errstr, 0.5);
+    $output = null;
+    $return_var = null;
+
+    // دستور ping سیستم (فقط 1 بار پینگ)
+    // برای لینوکس و macOS
+    $cmd = "ping -c 1 -W 1 " . escapeshellarg($ip);
+
+    exec($cmd, $output, $return_var);
     $ft = microtime(true);
-    $militime = round(($ft - $it) * 1e3, 2);
-    if ($check) {
-        fclose($check);
+
+    if ($return_var === 0) {
+        $militime = round(($ft - $it) * 1e3, 2);
         return $militime;
     } else {
         return "unavailable";
     }
 }
+
 
 function generate_name($flag, $ip, $port, $ping, $is_reality)
 {
