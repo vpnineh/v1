@@ -308,10 +308,16 @@ function ip_info($ip)
             $ip = $ip_address_array[$randomKey]["ip"];
         }
     }
-    $ipinfo = json_decode(
-        file_get_contents("https://api.country.is/" . $ip),
-        true
-    );
+
+    // استفاده از API جدید ipinfo.io به جای api.country.is
+    $url = "https://ipinfo.io/" . $ip . "/json";
+
+    // مدیریت خطا با @ و چک کردن نتیجه
+    $response = @file_get_contents($url);
+    if ($response === false) {
+        return null; // یا داده پیش فرض
+    }
+    $ipinfo = json_decode($response, true);
     return $ipinfo;
 }
 
@@ -319,7 +325,8 @@ function get_flag($ip)
 {
     $flag = "";
     $ip_info = ip_info($ip);
-    if (isset($ip_info["country"])) {
+    // کنترل اینکه ip_info مقدار معتبری برگشته باشد و کلید country باشد
+    if ($ip_info && isset($ip_info["country"])) {
         $location = $ip_info["country"];
         $flag = $location . getFlags($location);
     } else {
