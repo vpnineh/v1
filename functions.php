@@ -421,16 +421,28 @@ function get_port($input, $type)
 
 function ping($ip, $port)
 {
-    $it = microtime(true);
-    $check = @fsockopen($ip, $port, $errno, $errstr, 0.5);
-    $ft = microtime(true);
-    $militime = round(($ft - $it) * 1e3, 2);
-    if ($check) {
-        fclose($check);
-        return $militime;
-    } else {
-        return "unavailable";
+    $start = microtime(true);
+    $timeout = 0.5;
+    $context = stream_context_create([
+        'socket' => [
+            'bindto' => '0:0', // Optional: enforce source IP
+        ]
+    ]);
+    $fp = @stream_socket_client(
+        "tcp://$ip:$port",
+        $errno,
+        $errstr,
+        $timeout,
+        STREAM_CLIENT_CONNECT,
+        $context
+    );
+    $end = microtime(true);
+
+    if ($fp) {
+        fclose($fp);
+        return round(($end - $start) * 1000, 2); // return ping in ms
     }
+    return "unavailable";
 }
 
 function generate_name($flag, $ip, $port, $ping, $is_reality)
