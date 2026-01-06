@@ -8,8 +8,8 @@ $data1 = file_get_contents("https://raw.githubusercontent.com/hamedp-71/Trojan/r
 
 
 
-#if($data != $data1)
-#{
+if($data != $data1)
+{
   
   $merged_data = merge_subscription($subscription_urls);
   $merged_vmess = array_to_subscription($merged_data['vmess']);
@@ -55,4 +55,4 @@ file_put_contents("Split/Base64/trojan", base64_encode($merged_trojan));
 file_put_contents("Split/Normal/shadowsocks", $merged_shadowsocks);
 file_put_contents("Split/Base64/shadowsocks", base64_encode($merged_shadowsocks));
 file_put_contents("data.txt", file_get_contents("https://raw.githubusercontent.com/hamedp-71/Trojan/refs/heads/main/hp.txt"));
-#}
+}
